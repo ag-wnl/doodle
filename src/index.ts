@@ -12,7 +12,7 @@ program
     await research(topic);
 
     if (options.view) {
-      console.log("\n🚀 Starting markdown viewer...");
+      console.log("\nStarting markdown viewer...");
       await startViewer(true);
     }
   });

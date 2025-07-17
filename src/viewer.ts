@@ -48,157 +48,184 @@ function highlightCodeInHTML(html: string): string {
     });
 }
 
-// Solarized Light CSS Theme
-const solarizedLightCSS = `
-/* Solarized Light Theme */
-:root {
-  --base03: #002b36;
-  --base02: #073642;
-  --base01: #586e75;
-  --base00: #657b83;
-  --base0: #839496;
-  --base1: #93a1a1;
-  --base2: #eee8d5;
-  --base3: #fdf6e3;
-  --yellow: #b58900;
-  --orange: #cb4b16;
-  --red: #dc322f;
-  --magenta: #d33682;
-  --violet: #6c71c4;
-  --blue: #268bd2;
-  --cyan: #2aa198;
-  --green: #859900;
+// Clean Academic CSS Theme
+const academicCSS = `
+/* Academic Research Paper Style */
+* {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
   line-height: 1.6;
-  color: var(--base01);
-  background-color: var(--base3);
+  color: #586e75;
+  background-color: #fdf6e3;
   margin: 0;
   padding: 0;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: var(--base3);
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  background-color: #fdf6e3;
   min-height: 100vh;
 }
 
-.header {
-  border-bottom: 2px solid var(--base2);
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+.nav {
+  background-color: #eee8d5;
+  border-bottom: 1px solid #d3cbb7;
+  padding: 1rem 0;
+  margin: -2rem 0 2rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
-.nav {
-  background-color: var(--base2);
-  padding: 1rem;
-  margin: -2rem -2rem 2rem -2rem;
-  border-bottom: 1px solid var(--base1);
+.nav-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .nav a {
-  color: var(--blue);
+  color: #007bff;
   text-decoration: none;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   font-weight: 500;
 }
 
 .nav a:hover {
-  color: var(--cyan);
+  color: #0056b3;
   text-decoration: underline;
 }
 
+.nav .title {
+  float: right;
+  color: #6c757d;
+  font-weight: normal;
+}
+
+.header {
+  border-bottom: 1px solid #d3cbb7;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
 .file-list {
-  background-color: var(--base2);
+  background-color: #eee8d5;
+  border: 1px solid #d3cbb7;
+  border-radius: 4px;
   padding: 1.5rem;
-  border-radius: 8px;
   margin-bottom: 2rem;
 }
 
 .file-item {
   display: block;
-  color: var(--blue);
+  color: #007bff;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0.75rem;
   margin: 0.25rem 0;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .file-item:hover {
-  background-color: var(--base3);
-  color: var(--cyan);
+  background-color: #fdf6e3;
   text-decoration: none;
 }
 
+.file-item strong {
+  font-weight: 600;
+}
+
+.file-item small {
+  color: #6c757d;
+  font-size: 13px;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  color: var(--base02);
+  color: #212529;
   margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  line-height: 1.3;
 }
 
 h1 {
-  color: var(--blue);
-  border-bottom: 3px solid var(--base2);
+  font-size: 2rem;
+  border-bottom: 2px solid #e9ecef;
   padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
-  color: var(--green);
-  border-bottom: 1px solid var(--base2);
-  padding-bottom: 0.3rem;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 h3 {
-  color: var(--orange);
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.1rem;
 }
 
 p {
   margin-bottom: 1rem;
+  text-align: justify;
 }
 
 a {
-  color: var(--blue);
+  color: #007bff;
   text-decoration: underline;
 }
 
 a:hover {
-  color: var(--cyan);
+  color: #0056b3;
 }
 
 code {
-  background-color: var(--base2);
-  color: var(--red);
+  background-color: #eee8d5;
+  color: #dc322f;
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
-  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
   font-size: 0.9em;
+  border: 1px solid #d3cbb7;
 }
 
 pre {
-  background-color: var(--base2);
-  border: 1px solid var(--base1);
-  border-radius: 8px;
-  padding: 1.5rem;
+  background-color: #eee8d5;
+  border: 1px solid #d3cbb7;
+  border-radius: 4px;
+  padding: 1rem;
   overflow-x: auto;
   margin: 1.5rem 0;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 pre code {
   background: none;
-  color: var(--base01);
+  color: #586e75;
   padding: 0;
+  border: none;
   border-radius: 0;
 }
 
 blockquote {
-  border-left: 4px solid var(--blue);
-  background-color: var(--base2);
+  border-left: 4px solid #268bd2;
+  background-color: #eee8d5;
   margin: 1.5rem 0;
   padding: 1rem 1.5rem;
   font-style: italic;
@@ -208,22 +235,23 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
+  font-size: 15px;
 }
 
 th, td {
-  border: 1px solid var(--base1);
-  padding: 0.8rem;
+  border: 1px solid #d3cbb7;
+  padding: 0.75rem;
   text-align: left;
+  vertical-align: top;
 }
 
 th {
-  background-color: var(--base2);
-  color: var(--base02);
+  background-color: #eee8d5;
   font-weight: 600;
 }
 
 tr:nth-child(even) {
-  background-color: var(--base2);
+  background-color: #eee8d5;
 }
 
 ul, ol {
@@ -232,53 +260,94 @@ ul, ol {
 }
 
 li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
-/* Syntax highlighting for code blocks */
+/* Code highlighting */
 .hljs {
-  background: var(--base2) !important;
-  color: var(--base01) !important;
+  background: #eee8d5 !important;
+  color: #586e75 !important;
 }
 
-.hljs-keyword { color: var(--green) !important; }
-.hljs-string { color: var(--cyan) !important; }
-.hljs-comment { color: var(--base1) !important; font-style: italic; }
-.hljs-number { color: var(--magenta) !important; }
-.hljs-function { color: var(--blue) !important; }
-.hljs-variable { color: var(--orange) !important; }
-.hljs-type { color: var(--yellow) !important; }
-.hljs-title { color: var(--blue) !important; font-weight: bold; }
-.hljs-attr { color: var(--orange) !important; }
-.hljs-built_in { color: var(--red) !important; }
+.hljs-keyword { color: #d73a49 !important; }
+.hljs-string { color: #032f62 !important; }
+.hljs-comment { color: #6a737d !important; font-style: italic; }
+.hljs-number { color: #005cc5 !important; }
+.hljs-function { color: #6f42c1 !important; }
+.hljs-variable { color: #e36209 !important; }
+.hljs-type { color: #d73a49 !important; }
+.hljs-title { color: #6f42c1 !important; font-weight: bold; }
+.hljs-attr { color: #005cc5 !important; }
+.hljs-built_in { color: #005cc5 !important; }
 
 .metadata {
-  background-color: var(--base2);
-  border: 1px solid var(--base1);
-  border-radius: 8px;
+  background-color: #eee8d5;
+  border: 1px solid #d3cbb7;
+  border-radius: 4px;
   padding: 1rem;
   margin-bottom: 2rem;
-  font-size: 0.9em;
-  color: var(--base00);
+  font-size: 14px;
+  color: #657b83;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.metadata h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  color: #495057;
 }
 
 .back-to-list {
   display: inline-block;
-  margin-bottom: 1rem;
-  color: var(--blue);
+  margin-bottom: 1.5rem;
+  color: #007bff;
   text-decoration: none;
   font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
 }
 
 .back-to-list:hover {
-  color: var(--cyan);
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 .no-files {
   text-align: center;
-  color: var(--base00);
+  color: #6c757d;
   font-style: italic;
-  padding: 2rem;
+  padding: 3rem 2rem;
+}
+
+.no-files h3 {
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+/* Print styles for academic papers */
+@media print {
+  .nav, .back-to-list, .metadata {
+    display: none;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  pre, blockquote {
+    page-break-inside: avoid;
+  }
 }
 `;
 
@@ -307,9 +376,11 @@ function createHTMLTemplate(
   const nav = showNav
     ? `
     <div class="nav">
-      <a href="/">🏠 Home</a>
-      <a href="/list">📚 All Notes</a>
-      <span style="float: right; color: var(--base00);">📖 AI Research Agent Viewer</span>
+      <div class="nav-content">
+        <a href="/">Home</a>
+        <a href="/list">All Notes</a>
+        <span class="title">AI Research Agent</span>
+      </div>
     </div>
   `
     : "";
@@ -321,7 +392,7 @@ function createHTMLTemplate(
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${title} - Research Notes</title>
-      <style>${solarizedLightCSS}</style>
+      <style>${academicCSS}</style>
     </head>
     <body>
       <div class="container">
@@ -340,12 +411,12 @@ app.get("/", (req, res) => {
   if (files.length === 0) {
     const content = `
       <div class="header">
-        <h1>🔍 AI Research Agent Viewer</h1>
-        <p>Welcome to your research notes viewer!</p>
+        <h1>AI Research Agent</h1>
+        <p>Welcome to your research notes viewer.</p>
       </div>
       <div class="no-files">
         <h3>No research notes found</h3>
-        <p>Run <code>npm start research "your topic"</code> to create your first research note!</p>
+        <p>Run <code>npm start research "your topic"</code> to create your first research note.</p>
       </div>
     `;
     res.send(createHTMLTemplate("Home", content, false));
@@ -363,11 +434,11 @@ app.get("/list", (req, res) => {
   if (files.length === 0) {
     const content = `
       <div class="header">
-        <h1>📚 Research Notes</h1>
+        <h1>Research Notes</h1>
       </div>
       <div class="no-files">
         <h3>No research notes found</h3>
-        <p>Run <code>npm start research "your topic"</code> to create your first research note!</p>
+        <p>Run <code>npm start research "your topic"</code> to create your first research note.</p>
       </div>
     `;
     res.send(createHTMLTemplate("All Notes", content));
@@ -389,7 +460,7 @@ app.get("/list", (req, res) => {
       return `
       <a href="/view/${encodeURIComponent(file)}" class="file-item">
         <strong>${displayName}</strong><br>
-        <small style="color: var(--base00);">Created: ${formattedDate}</small>
+        <small>Created: ${formattedDate}</small>
       </a>
     `;
     })
@@ -397,7 +468,7 @@ app.get("/list", (req, res) => {
 
   const content = `
     <div class="header">
-      <h1>📚 All Research Notes</h1>
+      <h1>Research Notes</h1>
       <p>Select a research note to view:</p>
     </div>
     <div class="file-list">
@@ -418,9 +489,9 @@ app.get("/view/:filename", async (req, res) => {
         "File Not Found",
         `
       <div class="header">
-        <h1>❌ File Not Found</h1>
+        <h1>File Not Found</h1>
         <p>The file "${filename}" could not be found.</p>
-        <a href="/list" class="back-to-list">← Back to All Notes</a>
+        <a href="/list" class="back-to-list">Back to All Notes</a>
       </div>
     `
       )
@@ -457,7 +528,7 @@ app.get("/view/:filename", async (req, res) => {
 
         metadata = `
           <div class="metadata">
-            <h4>📋 Document Info</h4>
+            <h4>Document Information</h4>
             ${metadataLines}
           </div>
         `;
@@ -483,9 +554,9 @@ app.get("/view/:filename", async (req, res) => {
         "Error",
         `
       <div class="header">
-        <h1>❌ Error Reading File</h1>
+        <h1>Error Reading File</h1>
         <p>Could not read the file "${filename}": ${error}</p>
-        <a href="/list" class="back-to-list">← Back to All Notes</a>
+        <a href="/list" class="back-to-list">Back to All Notes</a>
       </div>
     `
       )
@@ -500,13 +571,13 @@ export async function startViewer(autoOpen: boolean = true): Promise<void> {
     server = app
       .listen(PORT, () => {
         const url = `http://localhost:${PORT}`;
-        console.log(`\n📖 Markdown Viewer started!`);
-        console.log(`🌐 View your research notes at: ${url}`);
-        console.log(`📱 Press Ctrl+C to stop the viewer\n`);
+        console.log(`\nMarkdown Viewer started!`);
+        console.log(`View your research notes at: ${url}`);
+        console.log(`Press Ctrl+C to stop the viewer\n`);
 
         if (autoOpen) {
           open(url).catch(() => {
-            console.log(`💡 Could not auto-open browser. Please visit: ${url}`);
+            console.log(`Could not auto-open browser. Please visit: ${url}`);
           });
         }
 
@@ -515,9 +586,9 @@ export async function startViewer(autoOpen: boolean = true): Promise<void> {
       .on("error", (err: any) => {
         if (err.code === "EADDRINUSE") {
           console.log(
-            `\n🔄 Port ${PORT} is already in use. The viewer might already be running.`
+            `\nPort ${PORT} is already in use. The viewer might already be running.`
           );
-          console.log(`🌐 Try visiting: http://localhost:${PORT}\n`);
+          console.log(`Try visiting: http://localhost:${PORT}\n`);
           resolve();
         } else {
           reject(err);
@@ -529,6 +600,6 @@ export async function startViewer(autoOpen: boolean = true): Promise<void> {
 export function stopViewer(): void {
   if (server) {
     server.close();
-    console.log("📖 Markdown Viewer stopped.");
+    console.log("Markdown Viewer stopped.");
   }
 }
