@@ -9,3 +9,9 @@ To run the agent locally
   yarn install
   yarn start research "Teach me about web servers and associated networking models used."
 ```
+
+To view notes generated for each session (prompt):
+
+```bash
+  yarn start view
+```
