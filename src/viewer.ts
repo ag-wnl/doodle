@@ -379,7 +379,7 @@ function createHTMLTemplate(
       <div class="nav-content">
         <a href="/">Home</a>
         <a href="/list">All Notes</a>
-        <span class="title">AI Research Agent</span>
+        <span class="title">doodle, by <a href="https://x.com/ag_wnl" target="_blank">@agwnl</a></span>
       </div>
     </div>
   `
@@ -411,8 +411,7 @@ app.get("/", (req, res) => {
   if (files.length === 0) {
     const content = `
       <div class="header">
-        <h1>AI Research Agent</h1>
-        <p>Welcome to your research notes viewer.</p>
+        <h1>doodle</h1>
       </div>
       <div class="no-files">
         <h3>No research notes found</h3>

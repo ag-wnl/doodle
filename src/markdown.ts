@@ -22,7 +22,7 @@ export function saveMarkdown(topic: string, content: string): Promise<string> {
     const metadataHeader = `---
 title: "${topic}"
 created: ${new Date().toISOString()}
-agent: AI Research Agent v2.0
+agent: doodle v0
 ---
 
 `;

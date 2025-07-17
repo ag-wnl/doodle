@@ -1,8 +1,14 @@
-import { getModel } from "./gemini";
+import { getModel } from "./models";
 import { saveMarkdown } from "./markdown";
 
-const MAX_ITERATIONS = 10; // Allow more iterations for quality
-const QUALITY_THRESHOLD = 8; // Out of 10
+const MAX_ITERATIONS = 5; // Allow more iterations for quality
+const QUALITY_THRESHOLD = 7; // Out of 10
+const REQUEST_DELAY_MS = 30000; // 30 seconds delay between requests
+
+// Helper function to add delay between requests
+async function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 interface ResearchState {
   topic: string;
@@ -58,6 +64,8 @@ CRITICAL INSTRUCTIONS:
 - Only state information you are confident about
 - For any uncertain information, clearly mark it as "needs verification"
 - Focus on verifiable, well-established knowledge
+- Explain concepts in detail first, then take concrete examples to solidify understanding
+- Always follow concept explanations with practical, real-world examples that illustrate the principles
 
 Your task: Analyze this topic and create a detailed research plan.
 
@@ -71,6 +79,10 @@ Format your response as a structured plan in markdown.`;
 
   const result = await model.generateContent(analysisPrompt);
   const analysis = result.response.text();
+
+  // Add delay after request
+  console.log("⏳ Waiting 30 seconds before next request...");
+  await delay(REQUEST_DELAY_MS);
 
   state.currentContent = `# Research Plan for ${state.topic}\n\n${analysis}\n\n---\n\n`;
   console.log("✅ Initial analysis complete");
@@ -141,6 +153,10 @@ REASON: [brief explanation]`;
   const result = await model.generateContent(prompt);
   const response = result.response.text();
 
+  // Add delay after request
+  console.log("⏳ Waiting 30 seconds before next request...");
+  await delay(REQUEST_DELAY_MS);
+
   const hasMore = response.includes("HAS_MORE: true");
   const focusMatch = response.match(/FOCUS: (.+)/);
   const focus = focusMatch ? focusMatch[1].trim() : "";
@@ -161,6 +177,8 @@ async function conductResearch(
 
 CRITICAL GUIDELINES:
 - Provide ONLY factually accurate information
+- Explain each concept in detail first, then provide concrete examples to solidify understanding
+- Always follow theoretical explanations with practical, real-world examples that illustrate the principles
 - Include specific, real examples and case studies when possible
 - Add relevant code snippets with proper syntax highlighting
 - Include references to authoritative sources (mark as "Reference needed: [description]" if you cannot provide exact URLs)
@@ -183,6 +201,10 @@ Format your response in markdown.`;
 
   const result = await model.generateContent(researchPrompt);
   const newContent = result.response.text();
+
+  // Add delay after request
+  console.log("⏳ Waiting 30 seconds before next request...");
+  await delay(REQUEST_DELAY_MS);
 
   // Integrate the new content
   state.currentContent += `\n## ${focus}\n\n${newContent}\n\n`;
@@ -212,6 +234,10 @@ Be honest and constructive in your evaluation.`;
 
   const result = await model.generateContent(prompt);
   const response = result.response.text();
+
+  // Add delay after request
+  console.log("⏳ Waiting 30 seconds before next request...");
+  await delay(REQUEST_DELAY_MS);
 
   const scoreMatch = response.match(/SCORE: (\d+(?:\.\d+)?)/);
   const score = scoreMatch ? parseFloat(scoreMatch[1]) : 5;
@@ -251,6 +277,10 @@ Format in markdown as a comprehensive "Extra Knowledge" section.`;
   const result = await model.generateContent(extraPrompt);
   const extraContent = result.response.text();
 
+  // Add delay after request
+  console.log("⏳ Waiting 30 seconds before next request...");
+  await delay(REQUEST_DELAY_MS);
+
   state.currentContent += `\n---\n\n# Extra Knowledge\n\n${extraContent}\n\n`;
   console.log("✅ Extra knowledge section added");
 }
@@ -278,6 +308,9 @@ Return the complete, polished document in markdown format.`;
 
   const result = await model.generateContent(finalPrompt);
   const finalContent = result.response.text();
+
+  // Add delay after final request (though this is the last one)
+  console.log("⏳ Final request completed");
 
   // Save the final document
   const filePath = await saveMarkdown(state.topic, finalContent);
